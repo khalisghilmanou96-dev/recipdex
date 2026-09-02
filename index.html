@@ -4,271 +4,913 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RecipeDex — TheMealDB</title>
+
 <style>
 :root{
-  --bg:#16110f;--panel:#211917;--panel2:#2a201d;--line:#3a2a26;
-  --txt:#fff6ec;--muted:#bdaaa0;--coral:#ff7f63;--cream:#ffdba8;--teal:#67dfca;
+  --bg:#16110f;
+  --panel:#211917;
+  --panel2:#2a201d;
+  --line:#3a2a26;
+  --txt:#fff6ec;
+  --muted:#bdaaa0;
+  --coral:#ff7f63;
+  --cream:#ffdba8;
+  --teal:#67dfca;
 }
+
 *{box-sizing:border-box}
+
 body{
-  margin:0;font-family:Inter,system-ui,Arial,sans-serif;color:var(--txt);
+  margin:0;
+  font-family:Inter,system-ui,Arial,sans-serif;
+  color:var(--txt);
   background:
     radial-gradient(circle at 85% 0,#54302866,transparent 30%),
     radial-gradient(circle at 0 40%,#17423d44,transparent 28%),
     var(--bg);
 }
+
 header{
-  height:68px;padding:0 max(20px,5vw);display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;
-  background:#16110fe8;backdrop-filter:blur(14px)
+  height:68px;
+  padding:0 max(20px,5vw);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#16110fe8;
+  backdrop-filter:blur(14px)
 }
-.logo{font-size:21px;font-weight:950}.logo b{color:var(--coral)}
+
+.logo{font-size:21px;font-weight:950}
+.logo b{color:var(--coral)}
 .small{font-size:12px;color:var(--muted)}
-main{width:min(1220px,92vw);margin:auto}
+
+main{
+  width:min(1220px,92vw);
+  margin:auto
+}
+
 .hero{padding:72px 0 28px}
-.eyebrow{font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
-h1{font-size:clamp(42px,7vw,78px);line-height:.94;margin:12px 0 16px;max-width:900px}
-.lead{max-width:700px;color:var(--muted);line-height:1.65}
-.controls{display:grid;grid-template-columns:1fr 220px 130px;gap:10px;margin:28px 0}
-.controls input,.controls select,.controls button{
-  padding:14px 15px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--txt);font:inherit
+
+.eyebrow{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--teal)
 }
-.controls button{background:var(--coral);border:0;color:#26110d;font-weight:950;cursor:pointer}
-.quick{display:flex;gap:8px;flex-wrap:wrap}
+
+h1{
+  font-size:clamp(42px,7vw,78px);
+  line-height:.94;
+  margin:12px 0 16px;
+  max-width:900px
+}
+
+.lead{
+  max-width:700px;
+  color:var(--muted);
+  line-height:1.65
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 220px 130px;
+  gap:10px;
+  margin:28px 0
+}
+
+.controls input,
+.controls select,
+.controls button{
+  padding:14px 15px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:var(--txt);
+  font:inherit
+}
+
+.controls button{
+  background:var(--coral);
+  border:0;
+  color:#26110d;
+  font-weight:950;
+  cursor:pointer
+}
+
+.quick{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+
 .quick button{
-  border:1px solid var(--line);background:#1a1513;color:var(--muted);
-  padding:8px 12px;border-radius:999px;cursor:pointer
+  border:1px solid var(--line);
+  background:#1a1513;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:999px;
+  cursor:pointer
 }
-.status{margin:20px 0;color:var(--muted);font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+.status{
+  margin:20px 0;
+  color:var(--muted);
+  font-size:13px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px
+}
+
 .card{
-  background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;
-  cursor:pointer;transition:.2s
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.2s
 }
-.card:hover{transform:translateY(-4px);border-color:#ffffff35}
-.pic{aspect-ratio:1/1;background:#0d0b0a;overflow:hidden}
-.pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
-.card:hover .pic img{transform:scale(1.035)}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#ffffff35
+}
+
+.pic{
+  aspect-ratio:1/1;
+  background:#0d0b0a;
+  overflow:hidden
+}
+
+.pic img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .3s
+}
+
+.card:hover .pic img{
+  transform:scale(1.035)
+}
+
 .body{padding:15px}
-.meta{font-size:10px;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:var(--teal)}
-.name{font-weight:900;font-size:18px;margin:8px 0 5px}
-.origin{font-size:12px;color:var(--muted)}
+
+.meta{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  font-weight:900;
+  color:var(--teal)
+}
+
+.name{
+  font-weight:900;
+  font-size:18px;
+  margin:8px 0 5px
+}
+
+.origin{
+  font-size:12px;
+  color:var(--muted)
+}
+
 .more{
-  display:block;margin:28px auto 60px;padding:13px 22px;border-radius:13px;border:1px solid var(--line);
-  background:var(--panel);color:var(--txt);font-weight:900;cursor:pointer
+  display:block;
+  margin:28px auto 60px;
+  padding:13px 22px;
+  border-radius:13px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:var(--txt);
+  font-weight:900;
+  cursor:pointer
 }
+
+/* PUBLICITÉS */
+.ad-zone{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:30px auto;
+  overflow:hidden;
+}
+
+.ad-desktop{
+  display:block;
+  max-width:728px;
+}
+
+.ad-mobile{
+  display:none;
+  max-width:320px;
+}
+
+.ad-square{
+  min-height:250px;
+}
+
 dialog{
-  width:min(920px,94vw);border:1px solid var(--line);border-radius:22px;background:#17110f;color:var(--txt);
-  padding:0;box-shadow:0 30px 100px #000b
+  width:min(920px,94vw);
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#17110f;
+  color:var(--txt);
+  padding:0;
+  box-shadow:0 30px 100px #000b
 }
-dialog::backdrop{background:#000b}
-.modal{display:grid;grid-template-columns:.9fr 1.1fr}
-.modal .photo{background:#0d0b0a;min-height:100%}
-.modal .photo img{width:100%;height:100%;max-height:78vh;object-fit:cover;display:block}
-.info{padding:26px;max-height:78vh;overflow:auto}
-.close{float:right;border:0;background:#322522;color:white;width:34px;height:34px;border-radius:50%;cursor:pointer}
-.info h2{font-size:30px;margin:20px 0 8px}
-.tags{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
-.tag{background:#2a201d;border:1px solid var(--line);padding:6px 9px;border-radius:999px;font-size:11px;color:var(--cream)}
-.ingredients{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
-.ingredients div{background:#211917;border-radius:10px;padding:9px 10px;font-size:12px;color:var(--muted)}
-.instructions{white-space:pre-line;color:var(--muted);line-height:1.6;font-size:13px}
+
+dialog::backdrop{
+  background:#000b
+}
+
+.modal{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr
+}
+
+.modal .photo{
+  background:#0d0b0a;
+  min-height:100%
+}
+
+.modal .photo img{
+  width:100%;
+  height:100%;
+  max-height:78vh;
+  object-fit:cover;
+  display:block
+}
+
+.info{
+  padding:26px;
+  max-height:78vh;
+  overflow:auto
+}
+
+.close{
+  float:right;
+  border:0;
+  background:#322522;
+  color:white;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  cursor:pointer
+}
+
+.info h2{
+  font-size:30px;
+  margin:20px 0 8px
+}
+
+.tags{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:12px 0
+}
+
+.tag{
+  background:#2a201d;
+  border:1px solid var(--line);
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:11px;
+  color:var(--cream)
+}
+
+.ingredients{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:16px 0
+}
+
+.ingredients div{
+  background:#211917;
+  border-radius:10px;
+  padding:9px 10px;
+  font-size:12px;
+  color:var(--muted)
+}
+
+.instructions{
+  white-space:pre-line;
+  color:var(--muted);
+  line-height:1.6;
+  font-size:13px
+}
+
 .link{
-  display:inline-block;margin-top:14px;background:var(--teal);color:#0d2622;text-decoration:none;
-  font-weight:900;padding:10px 13px;border-radius:11px
+  display:inline-block;
+  margin-top:14px;
+  background:var(--teal);
+  color:#0d2622;
+  text-decoration:none;
+  font-weight:900;
+  padding:10px 13px;
+  border-radius:11px
 }
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:12px}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:28px 0;
+  color:var(--muted);
+  font-size:12px
+}
+
 @media(max-width:900px){
   .grid{grid-template-columns:repeat(2,1fr)}
-  .controls{grid-template-columns:1fr 1fr}.controls input{grid-column:1/-1}
-  .modal{grid-template-columns:1fr}.modal .photo img{max-height:420px}
+  .controls{grid-template-columns:1fr 1fr}
+  .controls input{grid-column:1/-1}
+
+  .modal{grid-template-columns:1fr}
+  .modal .photo img{max-height:420px}
+
+  .ad-desktop{display:none}
+  .ad-mobile{display:block}
 }
+
 @media(max-width:540px){
-  .grid{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.controls input{grid-column:auto}
+  .grid{grid-template-columns:1fr}
+  .controls{grid-template-columns:1fr}
+  .controls input{grid-column:auto}
   .ingredients{grid-template-columns:1fr}
 }
 </style>
 </head>
+
 <body>
-<header><div class="logo">Recipe<b>Dex</b></div><div class="small">TheMealDB</div></header>
+
+<header>
+  <div class="logo">Recipe<b>Dex</b></div>
+  <div class="small">TheMealDB</div>
+</header>
 
 <main>
+
 <section class="hero">
   <div class="eyebrow">🍽️ Recherche de recettes</div>
+
   <h1>Trouve quoi cuisiner aujourd'hui.</h1>
-  <p class="lead">Recherche des recettes, explore les catégories et consulte les ingrédients, quantités, instructions et vidéos disponibles.</p>
+
+  <p class="lead">
+    Recherche des recettes, explore les catégories et consulte les ingrédients,
+    quantités, instructions et vidéos disponibles.
+  </p>
 
   <div class="controls">
     <input id="q" placeholder="Rechercher : chicken, pasta, curry…">
-    <select id="cat"><option value="">Toutes les catégories</option></select>
+
+    <select id="cat">
+      <option value="">Toutes les catégories</option>
+    </select>
+
     <button id="go">Rechercher</button>
   </div>
 
   <div class="quick">
-    <button>Chicken</button><button>Pasta</button><button>Seafood</button>
-    <button>Vegetarian</button><button>Dessert</button>
+    <button>Chicken</button>
+    <button>Pasta</button>
+    <button>Seafood</button>
+    <button>Vegetarian</button>
+    <button>Dessert</button>
   </div>
 </section>
 
-<div id="status" class="status">Chargement…</div>
-<section id="grid" class="grid"></section>
-<button id="more" class="more">Charger 20 autres recettes</button>
 
-<footer>Données : TheMealDB API.</footer>
+<!-- PUBLICITÉ 1 : 728x90 DESKTOP / 320x50 MOBILE -->
+<section class="ad-zone" aria-label="Publicité">
+
+  <div class="ad-desktop">
+    <script>
+      atOptions = {
+        'key' : '9471001bd08e3dbe3c16f38a6baf4177',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+
+    <script src="https://www.highrevenueformat.com/9471001bd08e3dbe3c16f38a6baf4177/invoke.js"></script>
+  </div>
+
+  <div class="ad-mobile">
+    <script>
+      atOptions = {
+        'key' : 'be2b73bb2ad70dc9f4efd05d61e511fb',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+
+    <script src="https://www.highrevenueformat.com/be2b73bb2ad70dc9f4efd05d61e511fb/invoke.js"></script>
+  </div>
+
+</section>
+
+
+<div id="status" class="status">
+  Chargement…
+</div>
+
+
+<section id="grid" class="grid"></section>
+
+
+<!-- PUBLICITÉ 2 : 300x250 -->
+<section class="ad-zone ad-square" aria-label="Publicité">
+
+  <script>
+    atOptions = {
+      'key' : 'fc65075bc33f166abe66f6ad44ac98f6',
+      'format' : 'iframe',
+      'height' : 250,
+      'width' : 300,
+      'params' : {}
+    };
+  </script>
+
+  <script src="https://www.highrevenueformat.com/fc65075bc33f166abe66f6ad44ac98f6/invoke.js"></script>
+
+</section>
+
+
+<button id="more" class="more">
+  Charger 20 autres recettes
+</button>
+
+
+<!-- PUBLICITÉ 3 : 300x250 -->
+<section class="ad-zone ad-square" aria-label="Publicité">
+
+  <script>
+    atOptions = {
+      'key' : 'fc65075bc33f166abe66f6ad44ac98f6',
+      'format' : 'iframe',
+      'height' : 250,
+      'width' : 300,
+      'params' : {}
+    };
+  </script>
+
+  <script src="https://www.highrevenueformat.com/fc65075bc33f166abe66f6ad44ac98f6/invoke.js"></script>
+
+</section>
+
+
+<!-- PUBLICITÉ 4 : 728x90 DESKTOP / 320x50 MOBILE -->
+<section class="ad-zone" aria-label="Publicité">
+
+  <div class="ad-desktop">
+    <script>
+      atOptions = {
+        'key' : '9471001bd08e3dbe3c16f38a6baf4177',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+
+    <script src="https://www.highrevenueformat.com/9471001bd08e3dbe3c16f38a6baf4177/invoke.js"></script>
+  </div>
+
+  <div class="ad-mobile">
+    <script>
+      atOptions = {
+        'key' : 'be2b73bb2ad70dc9f4efd05d61e511fb',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+
+    <script src="https://www.highrevenueformat.com/be2b73bb2ad70dc9f4efd05d61e511fb/invoke.js"></script>
+  </div>
+
+</section>
+
+
+<footer>
+  Données : TheMealDB API.
+</footer>
+
 </main>
 
-<dialog id="dlg"><div id="modal"></div></dialog>
+
+<dialog id="dlg">
+  <div id="modal"></div>
+</dialog>
+
 
 <script>
 const API="https://www.themealdb.com/api/json/v1/1";
-const grid=document.querySelector("#grid"),statusEl=document.querySelector("#status"),more=document.querySelector("#more"),dlg=document.querySelector("#dlg");
-let items=[],visible=20,currentMode="category",currentValue="Chicken",busy=false,requestId=0;
 
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const grid=document.querySelector("#grid"),
+statusEl=document.querySelector("#status"),
+more=document.querySelector("#more"),
+dlg=document.querySelector("#dlg");
+
+let items=[],
+visible=20,
+currentMode="category",
+currentValue="Chicken",
+busy=false,
+requestId=0;
+
+const esc=s=>String(s??"").replace(
+  /[&<>"']/g,
+  c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c])
+);
 
 async function getJSON(url){
+
   const ctl=new AbortController();
-  const timer=setTimeout(()=>ctl.abort(),10000);
+
+  const timer=setTimeout(
+    ()=>ctl.abort(),
+    10000
+  );
+
   try{
-    const r=await fetch(url,{signal:ctl.signal,headers:{"Accept":"application/json"}});
-    if(!r.ok) throw new Error("HTTP "+r.status);
+
+    const r=await fetch(
+      url,
+      {
+        signal:ctl.signal,
+        headers:{
+          "Accept":"application/json"
+        }
+      }
+    );
+
+    if(!r.ok)
+      throw new Error("HTTP "+r.status);
+
     return await r.json();
-  }finally{clearTimeout(timer)}
-}
 
-async function loadCategories(){
-  try{
-    const d=await getJSON(API+"/categories.php");
-    const sel=document.querySelector("#cat");
-    for(const c of d.categories||[]){
-      const o=document.createElement("option");
-      o.value=c.strCategory;o.textContent=c.strCategory;sel.appendChild(o);
-    }
-  }catch(e){}
-}
-
-async function fetchCurrent(reset=true){
-  if(busy)return;
-  busy=true;
-  const id=++requestId;
-  if(reset){grid.innerHTML="";visible=20}
-  statusEl.textContent="Chargement des recettes…";
-  more.disabled=true;
-
-  try{
-    let url;
-    if(currentMode==="category"){
-      url=API+"/filter.php?c="+encodeURIComponent(currentValue);
-    }else{
-      url=API+"/search.php?s="+encodeURIComponent(currentValue);
-    }
-
-    const d=await getJSON(url);
-    if(id!==requestId)return;
-
-    items=d.meals||[];
-    render();
-    statusEl.textContent=items.length
-      ? items.length.toLocaleString("fr-FR")+" recettes trouvées"
-      : "Aucune recette trouvée.";
-  }catch(e){
-    if(id===requestId){
-      statusEl.textContent="Impossible de charger les recettes. Réessaie dans quelques instants.";
-      grid.innerHTML="";
-    }
   }finally{
-    if(id===requestId){busy=false;more.disabled=false}
+    clearTimeout(timer)
   }
 }
 
-function render(){
-  grid.innerHTML="";
-  const frag=document.createDocumentFragment();
-  items.slice(0,visible).forEach(x=>{
-    const c=document.createElement("article");
-    c.className="card";
-    c.innerHTML=`<div class="pic"><img src="${esc(x.strMealThumb||"")}" alt="${esc(x.strMeal||"Recette")}" loading="lazy" decoding="async"></div>
-    <div class="body">
-      <div class="meta">${esc(x.strCategory||currentValue||"Recette")}</div>
-      <div class="name">${esc(x.strMeal||"Sans titre")}</div>
-      <div class="origin">${esc(x.strArea||"Cuisine internationale")}</div>
-    </div>`;
-    c.onclick=()=>openRecipe(x.idMeal);
-    frag.appendChild(c);
-  });
-  grid.appendChild(frag);
-  more.hidden=visible>=items.length;
-}
 
-async function openRecipe(id){
+async function loadCategories(){
+
   try{
-    const d=await getJSON(API+"/lookup.php?i="+encodeURIComponent(id));
-    const x=d.meals?.[0];
-    if(!x)return;
 
-    const ingredients=[];
-    for(let i=1;i<=20;i++){
-      const ing=(x["strIngredient"+i]||"").trim();
-      const mea=(x["strMeasure"+i]||"").trim();
-      if(ing) ingredients.push(`<div>${esc(ing)}${mea?` <b>· ${esc(mea)}</b>`:""}</div>`);
+    const d=await getJSON(
+      API+"/categories.php"
+    );
+
+    const sel=document.querySelector("#cat");
+
+    for(const c of d.categories||[]){
+
+      const o=document.createElement("option");
+
+      o.value=c.strCategory;
+      o.textContent=c.strCategory;
+
+      sel.appendChild(o);
     }
 
-    const tags=(x.strTags||"").split(",").map(t=>t.trim()).filter(Boolean);
-
-    document.querySelector("#modal").innerHTML=`<div class="modal">
-      <div class="photo"><img src="${esc(x.strMealThumb||"")}" alt="${esc(x.strMeal)}"></div>
-      <div class="info">
-        <button class="close" onclick="dlg.close()">×</button>
-        <div class="meta">${esc(x.strCategory||"Recette")} · ${esc(x.strArea||"")}</div>
-        <h2>${esc(x.strMeal)}</h2>
-        <div class="tags">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
-        <h3>Ingrédients</h3>
-        <div class="ingredients">${ingredients.join("")}</div>
-        <h3>Préparation</h3>
-        <div class="instructions">${esc(x.strInstructions||"Instructions non disponibles.")}</div>
-        ${x.strYoutube?`<a class="link" href="${esc(x.strYoutube)}" target="_blank" rel="noopener">Voir la vidéo ↗</a>`:""}
-      </div>
-    </div>`;
-    dlg.showModal();
   }catch(e){}
 }
 
+
+async function fetchCurrent(reset=true){
+
+  if(busy)return;
+
+  busy=true;
+
+  const id=++requestId;
+
+  if(reset){
+    grid.innerHTML="";
+    visible=20
+  }
+
+  statusEl.textContent=
+    "Chargement des recettes…";
+
+  more.disabled=true;
+
+  try{
+
+    let url;
+
+    if(currentMode==="category"){
+
+      url=
+        API+
+        "/filter.php?c="+
+        encodeURIComponent(currentValue);
+
+    }else{
+
+      url=
+        API+
+        "/search.php?s="+
+        encodeURIComponent(currentValue);
+    }
+
+    const d=await getJSON(url);
+
+    if(id!==requestId)
+      return;
+
+    items=d.meals||[];
+
+    render();
+
+    statusEl.textContent=
+      items.length
+      ?items.length.toLocaleString("fr-FR")+" recettes trouvées"
+      :"Aucune recette trouvée.";
+
+  }catch(e){
+
+    if(id===requestId){
+
+      statusEl.textContent=
+        "Impossible de charger les recettes. Réessaie dans quelques instants.";
+
+      grid.innerHTML="";
+    }
+
+  }finally{
+
+    if(id===requestId){
+      busy=false;
+      more.disabled=false
+    }
+  }
+}
+
+
+function render(){
+
+  grid.innerHTML="";
+
+  const frag=document.createDocumentFragment();
+
+  items.slice(0,visible).forEach(x=>{
+
+    const c=document.createElement("article");
+
+    c.className="card";
+
+    c.innerHTML=`
+      <div class="pic">
+        <img
+          src="${esc(x.strMealThumb||"")}"
+          alt="${esc(x.strMeal||"Recette")}"
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+
+      <div class="body">
+        <div class="meta">
+          ${esc(x.strCategory||currentValue||"Recette")}
+        </div>
+
+        <div class="name">
+          ${esc(x.strMeal||"Sans titre")}
+        </div>
+
+        <div class="origin">
+          ${esc(x.strArea||"Cuisine internationale")}
+        </div>
+      </div>
+    `;
+
+    c.onclick=()=>openRecipe(x.idMeal);
+
+    frag.appendChild(c);
+  });
+
+  grid.appendChild(frag);
+
+  more.hidden=
+    visible>=items.length;
+}
+
+
+async function openRecipe(id){
+
+  try{
+
+    const d=await getJSON(
+      API+
+      "/lookup.php?i="+
+      encodeURIComponent(id)
+    );
+
+    const x=d.meals?.[0];
+
+    if(!x)return;
+
+    const ingredients=[];
+
+    for(let i=1;i<=20;i++){
+
+      const ing=
+        (x["strIngredient"+i]||"").trim();
+
+      const mea=
+        (x["strMeasure"+i]||"").trim();
+
+      if(ing)
+        ingredients.push(
+          `<div>
+            ${esc(ing)}
+            ${mea?` <b>· ${esc(mea)}</b>`:""}
+          </div>`
+        );
+    }
+
+    const tags=
+      (x.strTags||"")
+      .split(",")
+      .map(t=>t.trim())
+      .filter(Boolean);
+
+    document.querySelector("#modal").innerHTML=`
+      <div class="modal">
+
+        <div class="photo">
+          <img
+            src="${esc(x.strMealThumb||"")}"
+            alt="${esc(x.strMeal)}"
+          >
+        </div>
+
+        <div class="info">
+
+          <button
+            class="close"
+            onclick="dlg.close()"
+          >
+            ×
+          </button>
+
+          <div class="meta">
+            ${esc(x.strCategory||"Recette")}
+            ·
+            ${esc(x.strArea||"")}
+          </div>
+
+          <h2>
+            ${esc(x.strMeal)}
+          </h2>
+
+          <div class="tags">
+            ${tags.map(
+              t=>`<span class="tag">${esc(t)}</span>`
+            ).join("")}
+          </div>
+
+          <h3>Ingrédients</h3>
+
+          <div class="ingredients">
+            ${ingredients.join("")}
+          </div>
+
+          <h3>Préparation</h3>
+
+          <div class="instructions">
+            ${esc(x.strInstructions||"Instructions non disponibles.")}
+          </div>
+
+          ${
+            x.strYoutube
+            ?`
+              <a
+                class="link"
+                href="${esc(x.strYoutube)}"
+                target="_blank"
+                rel="noopener"
+              >
+                Voir la vidéo ↗
+              </a>
+            `
+            :""
+          }
+
+        </div>
+      </div>
+    `;
+
+    dlg.showModal();
+
+  }catch(e){}
+}
+
+
 function searchText(){
-  const q=document.querySelector("#q").value.trim();
+
+  const q=
+    document.querySelector("#q")
+    .value
+    .trim();
+
   if(!q)return;
+
   document.querySelector("#cat").value="";
+
   currentMode="search";
   currentValue=q;
+
   fetchCurrent(true);
 }
 
-document.querySelector("#go").onclick=searchText;
-document.querySelector("#q").addEventListener("keydown",e=>{if(e.key==="Enter")searchText()});
 
-document.querySelector("#cat").onchange=e=>{
-  if(!e.target.value)return;
+document.querySelector("#go")
+.onclick=searchText;
+
+document.querySelector("#q")
+.addEventListener(
+  "keydown",
+  e=>{
+    if(e.key==="Enter")
+      searchText()
+  }
+);
+
+document.querySelector("#cat")
+.onchange=e=>{
+
+  if(!e.target.value)
+    return;
+
   document.querySelector("#q").value="";
+
   currentMode="category";
   currentValue=e.target.value;
+
   fetchCurrent(true);
 };
 
-document.querySelectorAll(".quick button").forEach(b=>b.onclick=()=>{
-  document.querySelector("#q").value="";
-  document.querySelector("#cat").value=b.textContent;
-  currentMode="category";
-  currentValue=b.textContent;
-  fetchCurrent(true);
-});
+document.querySelectorAll(".quick button")
+.forEach(
+  b=>b.onclick=()=>{
 
-more.onclick=()=>{visible+=20;render()};
-dlg.onclick=e=>{if(e.target===dlg)dlg.close()};
+    document.querySelector("#q").value="";
+
+    document.querySelector("#cat").value=
+      b.textContent;
+
+    currentMode="category";
+    currentValue=b.textContent;
+
+    fetchCurrent(true);
+  }
+);
+
+more.onclick=()=>{
+  visible+=20;
+  render()
+};
+
+dlg.onclick=e=>{
+  if(e.target===dlg)
+    dlg.close()
+};
 
 (async()=>{
+
   await loadCategories();
-  document.querySelector("#cat").value="Chicken";
+
+  document.querySelector("#cat").value=
+    "Chicken";
+
   await fetchCurrent(true);
+
 })();
 </script>
+
 </body>
 </html>
